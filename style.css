@@ -1,0 +1,160 @@
+
+
+
+body {
+    display: flex;
+    background-color: rgb(235, 243, 243);
+    z-index: 0;
+    padding: 0;
+    margin: 0;
+    font-family: OpenSans,Helvetica Neue,Helvetica,Arial,sans-serif;
+    background-image: "./sources/texture.png";
+}
+
+nav {
+    width: inherit;
+    border-bottom: 1px solid #e6e6e6;
+    margin: 0 0 25px 0;
+    /*background-color: rgb(64, 235, 169);*/
+    background-color: rgb(12, 110, 45);
+    font-family: arial,helvetica,clean,sans-serif;
+}
+
+ul {
+    display: flex;
+    width: 275px;
+    padding-right: 0;
+    margin: 0;
+    float: right;
+}
+
+span {
+    color: white;
+    padding: 10px 0 10px 25px;
+    position: relative;
+    top: 10px;
+}
+
+li {
+   list-style-type: none;
+   margin: 10px 0 10px 0;
+}
+
+p {
+    margin: 0;
+    line-height: 1.5;
+}
+
+div {
+    margin-top: 0;
+    margin-bottom: 25px;
+}
+
+img {
+    margin-bottom: 25px;
+    margin-top: 25px;
+   /*width: 250px;*/
+}
+
+input[type="button"] {
+    margin-right: 25px;
+    margin-left: 25px;
+}
+
+input[type="text"], input[type="file"] {
+    margin-left: 10px;
+}
+
+input[value="Сгенерировать"], input[value="Расшифровать"] {
+    margin: 0;
+}
+
+a:hover {
+    color: rgb(160, 245, 210);
+}
+
+h3 {
+    margin-top: 60px;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.left-aside, .right-aside {
+    background-color: rgb(160, 245, 210);
+    width: 25vw;
+    z-index: 1;
+    background: url("./sources/texture.png");
+}
+
+.main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /*justify-content: center;*/
+    width: 50vw;
+}
+
+.plain-uploading, .enciphered-uploading, .key-gen, .deciphering-key, .encipher, .deciphering-key-uploading {
+    width: 45vw;
+    display: flex;
+    margin-right: 0;
+    margin-bottom: 50px;
+}
+
+.encipher-link, .decipher-link {
+    text-decoration: none;
+    height: inherit;
+    color: white;
+    display: flex;
+}
+
+.encipher-link {
+    border-right: 1px solid rgb(235, 243, 243);
+    padding-right: 25px;
+}
+
+.decipher-link {
+    padding-left: 25px;
+}
+
+.intro {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 25px 0 25px;
+}
+
+.plain-downloading {
+    margin: auto;
+}
+
+.span-registered {
+    color: white;
+    padding: 10px 0 10px 0;
+    position: relative;
+    top: 5px;
+    right: 3px;
+    font-size: 10px;
+}
+
+.image-description {
+    margin-bottom: 25px;
+}
+
+.enciphered-downloading, .plain-downloading {
+    margin-top: 50px;
+    width: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.process-indicator {
+    margin: 0;
+    padding: 0;
+    display: none;
+}
+
+#encode-button {
+    margin: 0 0 0 10px;
+}

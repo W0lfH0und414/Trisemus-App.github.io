@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Trisemus Algorithm</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <aside class="left-aside"></aside>
+        <div class="main-content">
+            <nav>
+                <span>ASIS LABS INC.</span>
+                <span class="span-registered">®</span>
+                <ul>
+                    <a href=#encipher class="encipher-link"><li>Зашифровать</li></a>
+                    <a href=#decipher class="decipher-link"><li>Расшифровать</li></a>
+                </ul>
+            </nav>
+            <div class="intro">
+                <h2>Шифрующие таблицы Трисемуса</h2>
+                <p>
+                    В 1508 г. аббат из Германии Иоганн Трисемус написал печатную работу по криптологии под названием «Полиграфия».
+                    В этой книге он впервые систематически описал применение шифрующих таблиц, заполненных алфавитом в случайном 
+                    порядке. Для получения такого шифра замены обычно использовались таблица для записи букв алфавита и ключевое 
+                    слово (или фраза). В таблицу сначала вписывалось по строкам ключевое слово, причем повторяющиеся буквы
+                    отбрасывались. Затем эта таблица дополнялась не вошедшими в нее буквами алфавита по порядку.
+                    На рис. 1 изображена таблица с ключевым словом «ДЯДИНА».
+                </p>
+                <img src="./sources/Trisemus-table-cut.png"></img>
+                <p class="image-description">Рис.1. Шифрующая таблица Трисемуса</p>
+                <p>Каждая буква открытого сообщения заменяется буквой, расположенной под ней в том же столбце. Если буква
+                   находится в последней строке таблицы, то для ее шифрования берут самую верхнюю букву столбца. Например,
+                   исходное сообщение «АБРАМОВ», зашифрованное – «ЖЗЦЖУФЙ».</p>
+            </div>
+            <h3 id="encipher">Шифрование текстовых файлов методом таблиц Трисемуса</h3>
+            <div class="plain-uploading">
+                <p>Загрузите файл, который Вы хотите зашифровать:</p>
+                <input id="load-dec" type="file"/>
+            </div>
+            <div class="key-gen">
+                <p>Сгенерируйте ключ шифрования:</p>
+                <input type="text" id="keygen-input" readonly>
+                <input type="button" id="keygen-button" value="Сгенерировать" disabled>
+            </div>
+            <div class="encipher">
+                <p>Чтобы зашифровать файл по сгенерированному ключу, нажмите на кнопку:</p>
+                <input type="button" id="encode-button" value="Зашифровать" disabled>
+            </div>
+            <div class="process-indicator"></div>
+            <div class="enciphered-downloading">
+                <a id="enciphered-txt-link" download="enciphered.txt" href=#><input type="button" id="download-encoded" value="Скачать зашифрованный файл" disabled></a>
+                <a id="key-txt-link" download="key.json" href=#><input type="button" id="download-key" value="Сохранить ключ" disabled></a>
+            </div> 
+            <h3 id="decipher">Дешифрование текстовых файлов методом таблиц Трисемуса</h3>
+            <div class="enciphered-uploading">
+                <p>Загрузите файл, который Вы хотите расшифровать:</p>
+                <input id="load-en" type="file"/>
+            </div>
+            <div class="deciphering-key-uploading">
+                <p>Загрузите файл ключа дешифрования:</p>
+                <input id="load-en-key" type="file"/>
+            </div>
+            <div class="decipher">
+                <input type="button" id="decode-button" value="Расшифровать" disabled>
+            </div>
+            <div class="process-indicator"></div>
+            <div class="plain-downloading">
+                <a id="deciphered-txt-link" download="deciphered.txt" href=#><input type="button" id="download-decoded" value="Скачать расшифрованный файл" disabled></a>
+            </div> 
+        </div>  
+        <aside class="right-aside"></aside>  
+        <script src="index.js"></script> 
+    </body>
+</html>
