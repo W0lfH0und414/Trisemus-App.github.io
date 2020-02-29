@@ -94,7 +94,7 @@ h3 {
     width: 50vw;
 }
 
-.plain-uploading, .enciphered-uploading, .key-gen, .deciphering-key, .encipher, .deciphering-key-uploading {
+.plain-uploading, .enciphered-uploading, .key-gen, .deciphering-key, .encipher, .deciphering-key-uploading, .decipher {
     width: 45vw;
     display: flex;
     margin-right: 0;
@@ -152,9 +152,12 @@ h3 {
 .process-indicator {
     margin: 0;
     padding: 0;
+    width: 0px;
+    height: 10px;
+    background-color: green;
     display: none;
 }
 
-#encode-button {
+#encode-button, #decode-button {
     margin: 0 0 0 10px;
 }

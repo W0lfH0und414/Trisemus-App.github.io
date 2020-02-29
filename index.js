@@ -8,6 +8,8 @@ const ENCODE_BTN = document.getElementById('encode-button');
 const DOWNLOAD_ENCODED_TXT_BTN = document.getElementById('download-encoded');
 const DOWNLOAD_KEY_BTN = document.getElementById('download-key');
 const DOWNLOAD_DECODED_TXT_BTN = document.getElementById('download-decoded')
+const ENCODE_PROGRESS_BAR = document.getElementById('encode-progress');
+const DECODE_PROGRESS_BAR = document.getElementById('decode-progress');
 const nonKeyWordChars = [' ', ',', '.', '<', '>', '/', '|', '\\', '\[', '\]',
  '\{', '\}', '!', '@', '\"', '\'', '#', '№', '$', ';', '%', '^', ':', '&', '?',
  '*', '(', ')', '~', '`', '+', '-', '_', '=', '↵', '\n', '\t', '\r'];
@@ -156,6 +158,19 @@ const handleEncode = () => {
                     encipheredText += key[0][key[j].indexOf(plainText[i])];
                 }
             }
+            if (i > 0.2*plainText.length) {
+                ENCODE_PROGRESS_BAR.style.width = "10vw";
+                setTimeout(3000);
+            } else if (i > 0.4*plainText.length) {
+                ENCODE_PROGRESS_BAR.style.width = "20vw";
+            } else if (i > 0.6*plainText.length) {
+                ENCODE_PROGRESS_BAR.style.width = "30vw";
+            } else if (i > 0.8*plainText.length) {
+                ENCODE_PROGRESS_BAR.style.width = "40vw";
+            } else if (i === plainText.length - 1) {
+                ENCODE_PROGRESS_BAR.style.width = "45vw";
+            }
+
         }
         console.log(encipheredText);
         let base = btoa(encipheredText);
