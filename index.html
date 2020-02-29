@@ -46,7 +46,7 @@
                 <p>Чтобы зашифровать файл по сгенерированному ключу, нажмите на кнопку:</p>
                 <input type="button" id="encode-button" value="Зашифровать" disabled>
             </div>
-            <div class="process-indicator"></div>
+            <div class="process-indicator" id="encode-progress"></div>
             <div class="enciphered-downloading">
                 <a id="enciphered-txt-link" download="enciphered.txt" href=#><input type="button" id="download-encoded" value="Скачать зашифрованный файл" disabled></a>
                 <a id="key-txt-link" download="key.json" href=#><input type="button" id="download-key" value="Сохранить ключ" disabled></a>
@@ -61,9 +61,10 @@
                 <input id="load-en-key" type="file"/>
             </div>
             <div class="decipher">
+                <p>Чтобы расшифровать файл по загруженному ключу, нажмите на кнопку:</p>
                 <input type="button" id="decode-button" value="Расшифровать" disabled>
             </div>
-            <div class="process-indicator"></div>
+            <div class="process-indicator" id="decode-progress"></div>
             <div class="plain-downloading">
                 <a id="deciphered-txt-link" download="deciphered.txt" href=#><input type="button" id="download-decoded" value="Скачать расшифрованный файл" disabled></a>
             </div> 
