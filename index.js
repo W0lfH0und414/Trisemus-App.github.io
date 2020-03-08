@@ -1,3 +1,5 @@
+
+
 const ENCODE_LINK = document.getElementById('enciphered-txt-link');
 const DECODE_LINK = document.getElementById('deciphered-txt-link');
 const KEY_LINK = document.getElementById('key-txt-link');
@@ -13,6 +15,9 @@ const DECODE_PROGRESS_BAR = document.getElementById('decode-progress');
 const nonKeyWordChars = [' ', ',', '.', '<', '>', '/', '|', '\\', '\[', '\]',
  '\{', '\}', '!', '@', '\"', '\'', '#', '№', '$', ';', '%', '^', ':', '&', '?',
  '*', '(', ')', '~', '`', '+', '-', '_', '=', '↵', '\n', '\t', '\r'];
+const russian = ['а', 'б', 'в', '<', '>', '/', '|', '\\', '\[', '\]',
+'\{', '\}', '!', '@', '\"', '\'', '#', '№', '$', ';', '%', '^', ':', '&', '?',
+'*', '(', ')', '~', '`', '+', '-', '_', '=', '↵', '\n', '\t', '\r'];
 const TYPE = 'data:application/octet-stream;base64, ';
 let key = [];
 let alphabet = [];
@@ -20,6 +25,7 @@ let previousFileInput = null;
 let keyWord = "";
 let plainText = "";
 let encipheredText = "";
+let keyLen = 0;
 
 
 let decodeKey = {};
@@ -65,7 +71,12 @@ const handleKeyGen = (e) => {
                     }
                 })
                 if (nonPunctuationChars) {
-                    let keyLen = Math.round(Math.random()*3) + 5;
+                    if (plainText.length > 40) {
+                        keyLen = Math.round(Math.random()*3) + 5;
+                    } 
+                    else {
+                        keyLen = Math.round(Math.random()*4);
+                    }
                     console.log(keyLen);
                     keyWord = "";
                     let keyChar = '';
@@ -158,23 +169,9 @@ const handleEncode = () => {
                     encipheredText += key[0][key[j].indexOf(plainText[i])];
                 }
             }
-            if (i > 0.2*plainText.length) {
-                ENCODE_PROGRESS_BAR.style.width = "10vw";
-                setTimeout(3000);
-            } else if (i > 0.4*plainText.length) {
-                ENCODE_PROGRESS_BAR.style.width = "20vw";
-            } else if (i > 0.6*plainText.length) {
-                ENCODE_PROGRESS_BAR.style.width = "30vw";
-            } else if (i > 0.8*plainText.length) {
-                ENCODE_PROGRESS_BAR.style.width = "40vw";
-            } else if (i === plainText.length - 1) {
-                ENCODE_PROGRESS_BAR.style.width = "45vw";
-            }
-
         }
         console.log(encipheredText);
-        let base = btoa(encipheredText);
-        let result = TYPE + base;
+        let result = TYPE + btoa(encipheredText);
         let keyObject = JSON.stringify({
             key: key
         });
@@ -268,6 +265,22 @@ const keyEndingCheck = (key) => {
         }
     }
     return -1;
+}
+
+const toBinary = (string) => {
+    const codeUnits = new Uint16Array(string.length);
+    for (let i = 0; i < codeUnits.length; i++) {
+      codeUnits[i] = string.charCodeAt(i);
+    }
+    return String.fromCharCode(...new Uint8Array(codeUnits.buffer));
+}
+
+const fromBinary = (binary) => {
+    const bytes = new Uint8Array(binary.length);
+    for (let i = 0; i < bytes.length; i++) {
+      bytes[i] = binary.charCodeAt(i);
+    }
+    return String.fromCharCode(...new Uint16Array(bytes.buffer));
 }
 
 KEYGEN_BTN.addEventListener('click', handleKeyGen);
