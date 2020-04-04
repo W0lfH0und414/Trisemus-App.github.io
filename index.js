@@ -15,9 +15,6 @@ const DECODE_PROGRESS_BAR = document.getElementById('decode-progress');
 const nonKeyWordChars = [' ', ',', '.', '<', '>', '/', '|', '\\', '\[', '\]',
  '\{', '\}', '!', '@', '\"', '\'', '#', '№', '$', ';', '%', '^', ':', '&', '?',
  '*', '(', ')', '~', '`', '+', '-', '_', '=', '↵', '\n', '\t', '\r'];
-const russian = ['а', 'б', 'в', '<', '>', '/', '|', '\\', '\[', '\]',
-'\{', '\}', '!', '@', '\"', '\'', '#', '№', '$', ';', '%', '^', ':', '&', '?',
-'*', '(', ')', '~', '`', '+', '-', '_', '=', '↵', '\n', '\t', '\r'];
 const TYPE = 'data:application/octet-stream;base64, ';
 let key = [];
 let alphabet = [];
@@ -26,8 +23,6 @@ let keyWord = "";
 let plainText = "";
 let encipheredText = "";
 let keyLen = 0;
-
-
 let decodeKey = {};
 let previousEncTxtInput = "";
 let previousKeyInput = "";
@@ -171,11 +166,17 @@ const handleEncode = () => {
             }
         }
         console.log(encipheredText);
-        let result = TYPE + btoa(encipheredText);
+        console.log(toBinary(encipheredText));
+        console.log(fromBinary(encipheredText));
+        //let result = TYPE + btoa(encipheredText);
+        let converted = toBinary(encipheredText);
+        let result = TYPE + btoa(converted);
         let keyObject = JSON.stringify({
             key: key
         });
-        let keyRef = TYPE + btoa(keyObject);
+        let convertedKey = toBinary(keyObject);
+        //let keyRef = TYPE + btoa(keyObject);
+        let keyRef = TYPE + btoa(convertedKey);
         DOWNLOAD_ENCODED_TXT_BTN.disabled = false;
         DOWNLOAD_KEY_BTN.disabled = false;
         ENCODE_LINK.href = result;
@@ -193,9 +194,11 @@ const handleDecode = () => {
             loadedEncipheredText = "";
             reader.onload = () => {
                 if (reader.result) {
-                    loadedEncipheredText = reader.result;
+                    //let enciphered = atob(reader.result);
+                    loadedEncipheredText = fromBinary(reader.result);
                     console.log(reader.result);
-                    resolve(reader.result);
+                    //resolve(reader.result);
+                    resolve(loadedEncipheredText);
                 }
             };
             reader.readAsText(encipheredFile);
@@ -215,7 +218,7 @@ const handleDecode = () => {
                     keyReader.onload = () => {
                         if(keyReader.result) {
                             console.log(keyReader.result);
-                            resolve(keyReader.result);
+                            resolve(fromBinary(keyReader.result));
                         }
                     };
                     keyReader.readAsText(keyFile)
@@ -248,7 +251,9 @@ const handleDecode = () => {
                     }
                 }
                 if (decipheredText) {
-                    DECODE_LINK.href = TYPE + btoa(decipheredText);
+                    //DECODE_LINK.href = TYPE + btoa(decipheredText);
+                    let binaryDecoded = toBinary(decipheredText)
+                    DECODE_LINK.href = TYPE + btoa(binaryDecoded);
                     console.log(decipheredText);
                     DOWNLOAD_DECODED_TXT_BTN.disabled = false;
                 }
